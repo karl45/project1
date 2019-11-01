@@ -1,0 +1,35 @@
+﻿@model IEnumerable<aspnetfirst.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<h3>Matches</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name_of_person</th>
+            <th>Points</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(model => Item.Username)</td>
+            <td>@Html.DisplayFor(model => Item.Points)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Item.UserId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Item.UserId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Item.UserId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<aspnetfirst.Models.ScoreStatistic>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numberofpenalty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberofyellowCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numberofredcard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Match)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numberofpenalty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberofyellowCard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numberofredcard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Match.MatchId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ScoreStatisticId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ScoreStatisticId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScoreStatisticId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
