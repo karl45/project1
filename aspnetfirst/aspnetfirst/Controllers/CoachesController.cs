@@ -59,6 +59,10 @@ namespace aspnetfirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CoachId,CoachName,Rate")] Coach coach)
         {
+            if (string.IsNullOrEmpty(coach.CoachName))
+            {
+                ModelState.AddModelError("CoachName", "Введите имя тренера");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(coach);

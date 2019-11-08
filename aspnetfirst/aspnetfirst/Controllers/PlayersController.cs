@@ -52,6 +52,8 @@ namespace aspnetfirst.Controllers
             return View();
         }
 
+
+
         // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -59,6 +61,18 @@ namespace aspnetfirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlayerId,PlayerName,Offence,Deffence,TeamId")] Player player)
         {
+            if (string.IsNullOrEmpty(player.PlayerName))
+            {
+                ModelState.AddModelError("PlayerName", "некорректно");
+            }
+            if (player.Offence > 100)
+            {
+                ModelState.AddModelError("Offence", "некорректно");
+            }
+            if (player.Deffence > 100)
+            {
+                ModelState.AddModelError("Deffence", "некорректно");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(player);
@@ -67,6 +81,17 @@ namespace aspnetfirst.Controllers
             }
             ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "TeamId", player.TeamId);
             return View(player);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyName(string Name)
+        {
+            if (Name != "VirtusPro")
+            {
+                return Json(false);
+            }
+
+            return Json(true);
         }
 
         // GET: Players/Edit/5

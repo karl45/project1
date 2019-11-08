@@ -44,7 +44,27 @@ namespace aspnetfirst.Controllers
 
             return View(team);
         }
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyTeamRate(int rate)
+        {
+            if (rate < 5)
+            {
+                return Json(false);
+            }
 
+            return Json(true);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyName(string Name)
+        {
+            if (Name != "VirtusPro")
+            {
+                return Json(false);
+            }
+
+            return Json(true);
+        }
         // GET: Teams/Create
         public IActionResult Create()
         {

@@ -14,11 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Team_homeId" class="control-label"></label>
-                <select asp-for="Team_homeId" class ="form-control" asp-items="ViewBag.Team_homeId"></select>
+                <select asp-for="Team_homeId" class="form-control" asp-items="ViewBag.Team_homeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Team_guestId" class="control-label"></label>
-                <select asp-for="Team_guestId" class ="form-control" asp-items="ViewBag.Team_guestId"></select>
+                <select asp-for="Team_guestId" class="form-control" asp-items="ViewBag.Team_guestId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -32,5 +32,29 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <!-- остальное содержимое-->
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <!-- остальное содержимое-->
+    </environment>
+    <environment names="Development">
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+                asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+        </script>
+    </environment>
 }
