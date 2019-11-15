@@ -10,6 +10,9 @@ namespace aspnetfirst.Models
 {
     public class Player:IValidatableObject
     {
+        public Player() { 
+        
+        }
         public int PlayerId { set; get; }
 
       

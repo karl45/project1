@@ -5,11 +5,19 @@
 }
 
 <h2>Users</h2>
-
+<ul>
+    <li>@Html.ActionLink("Player", "Index", "Players")</li>
+    <li>@Html.ActionLink("Team", "Index", "Teams")</li>
+    <li>@Html.ActionLink("League", "Index", "Leagues")</li>
+    <li>@Html.ActionLink("Coach", "Index", "Coaches")</li>
+    <li>@Html.ActionLink("ScoreStatistic", "Index", "ScoreStatistics")</li>
+    <li>@Html.ActionLink("Match", "Index", "Matches")</li>
+</ul>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <h3>Matches</h3>
+
 <table>
     <thead>
         <tr>
@@ -19,17 +27,18 @@
         </tr>
     </thead>
     <tbody>
+
         @foreach (var Item in Model)
         {
-        <tr>
-            <td>@Html.DisplayFor(model => Item.Username)</td>
-            <td>@Html.DisplayFor(model => Item.Points)</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@Item.UserId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@Item.UserId">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => Item.Username)</td>
+                <td>@Html.DisplayFor(model => Item.Points)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@Item.UserId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Item.UserId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Item.UserId">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
