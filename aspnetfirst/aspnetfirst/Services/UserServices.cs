@@ -50,7 +50,7 @@ namespace aspnetfirst.Services
 
         public async Task<List<User>> Edit(int text)
         {
-            var searchedMovies = await _Users.GetPlayers(User => User.UserId == text);
+            var searchedMovies = await _Users.GetPlayers(User => Convert.ToInt32(User.Id) == text);
             return searchedMovies;
         }
 

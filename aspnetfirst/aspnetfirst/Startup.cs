@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using aspnetfirst.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace aspnetfirst
 {
@@ -28,6 +29,11 @@ namespace aspnetfirst
             {
                 options.UseSqlite("Filename=1XBET.db");
             });
+
+            services.AddIdentity<User, IdentityRole>(options=> {
+                options.Password.RequireNonAlphanumeric = false;
+            })
+               .AddEntityFrameworkStores<BetContext>();
             services.AddMvc();
             services.AddRouting();
             services.AddScoped<PlayerServices>();
@@ -46,6 +52,8 @@ namespace aspnetfirst
             services.AddScoped<IMatchRepository,MatchRepository>();
 
 
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,14 +63,17 @@ namespace aspnetfirst
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Users}/{action=WatchUsers}/{id?}");
+                    template: "{controller=Users}/{action=Login}/{id?}");
             });
-            app.UseStaticFiles();
-            
+   
+           
         }
     }
 }

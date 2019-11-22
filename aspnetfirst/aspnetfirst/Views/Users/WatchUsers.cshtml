@@ -14,7 +14,7 @@
     <li>@Html.ActionLink("Match", "Index", "Matches")</li>
 </ul>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-controller="Users">Create New</a>
 </p>
 <h3>Matches</h3>
 
@@ -31,14 +31,17 @@
         @foreach (var Item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(model => Item.Username)</td>
+                <td>@Html.DisplayFor(model => Item.UserName)</td>
                 <td>@Html.DisplayFor(model => Item.Points)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@Item.UserId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Item.UserId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Item.UserId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@Item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@Item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@Item.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
+    <form method="post" asp-controller="Users" asp-action="LogOut">
+        <input type="submit" value="Выход" />
+    </form>
 </table>

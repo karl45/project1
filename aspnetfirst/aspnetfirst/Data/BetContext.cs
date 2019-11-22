@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using aspnetfirst.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace aspnetfirst.Data
 {
-    public class BetContext:DbContext
+    public class BetContext: IdentityDbContext<User>
     {
         public BetContext(DbContextOptions options):base(options) => Database.EnsureCreated();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Player>()
                 .HasOne(t => t.Team)
                 .WithMany(v => v.Players)
@@ -90,14 +92,18 @@ namespace aspnetfirst.Data
                  new ScoreStatistic() { ScoreStatisticId = 2,Numberofpenalty = 15,Numberofredcard=2,NumberofyellowCard =6,Score="3-2",MatchId=2}
                  );
             modelBuilder.Entity<User>().HasData(
-                    new User() { UserId = 1, Username = "Ali", UserPassword = "AliPass", Points = 100},
-                    new User() { UserId = 2,Username = "Dias",UserPassword="seniorhacka",Points = 80}
+                    new User() { Id="1", UserName = "Ali", UserPassword = "AliPass", Points = 100},
+                    new User() { Id ="2", UserName = "Dias",UserPassword="seniorhacka",Points = 80}
                 );
             modelBuilder.Entity<UserMatch>().HasData(
-                    new UserMatch() { UserMatchId = 1, UserId=1,MatchId=1},
-                    new UserMatch() { UserMatchId = 2, UserId=2,MatchId=2},
-                    new UserMatch() { UserMatchId = 3, UserId=1,MatchId=2}
+                    new UserMatch() { UserMatchId = 1, UserId="1",MatchId=1},
+                    new UserMatch() { UserMatchId = 2, UserId="2",MatchId=2},
+                    new UserMatch() { UserMatchId = 3, UserId="1",MatchId=2}
             );
+            modelBuilder.Entity<IdentityRole>().HasData(
+                    new IdentityRole("admin"),
+                    new IdentityRole("user")
+                );
 
         }
         public DbSet<aspnetfirst.Models.League> League { get; set; }

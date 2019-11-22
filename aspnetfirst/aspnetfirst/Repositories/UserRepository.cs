@@ -19,7 +19,7 @@ namespace aspnetfirst.Repositories
         }
         public bool UserExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.User.Any(e => Convert.ToInt32(e.Id) == id);
         }
 
         public void Add(User User)
@@ -54,7 +54,7 @@ namespace aspnetfirst.Repositories
 
         public Task<User> GetUser(int id)
         {
-            return _context.User.FirstOrDefaultAsync(m => m.UserId == id);
+            return _context.User.FirstOrDefaultAsync(m => Convert.ToInt32(m.Id) == id);
         }
     }
 }

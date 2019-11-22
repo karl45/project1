@@ -41,7 +41,7 @@ namespace aspnetfirst.Controllers
             var userMatch = await _context.UserMatch
                 .Include(u => u.Match)
                 .Include(u => u.User)
-                .FirstOrDefaultAsync(m => m.MatchId == match_id && m.UserId == user_id);
+                .FirstOrDefaultAsync(m => m.MatchId == match_id && Convert.ToInt32(m.UserId) == user_id);
             if (userMatch == null)
             {
                 return NotFound();
@@ -134,7 +134,7 @@ namespace aspnetfirst.Controllers
             var userMatch = await _context.UserMatch
                 .Include(u => u.Match)
                 .Include(u => u.User)
-                .FirstOrDefaultAsync(m => m.MatchId == match_id && m.UserId == user_id);
+                .FirstOrDefaultAsync(m => m.MatchId == match_id && Convert.ToInt32(m.UserId) == user_id);
             if (userMatch == null)
             {
                 return NotFound();

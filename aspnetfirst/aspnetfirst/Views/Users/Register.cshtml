@@ -1,0 +1,25 @@
+﻿
+@model aspnetfirst.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<h2>Регистрация нового пользователя</h2>
+<form method="post" asp-controller="Users" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="UserName"></label><br />
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+    <div>
+        <label asp-for="UserPassword"></label><br />
+        <input asp-for="UserPassword" />
+        <span asp-validation-for="UserPassword"></span>
+    </div>
+    <div>
+        <input type="submit" value="Регистрация" />
+    </div>
+</form>

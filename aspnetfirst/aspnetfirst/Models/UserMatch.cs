@@ -10,7 +10,7 @@ namespace aspnetfirst.Models
         public int UserMatchId { set; get; }
         public int MatchId { set; get; }
         public Match Match { set; get; }
-        public int UserId { set; get; }
+        public string UserId { set; get; }
         public User User { set; get; }
     }
 }
