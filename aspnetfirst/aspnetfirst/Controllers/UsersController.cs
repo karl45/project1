@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using aspnetfirst.Data;
 using aspnetfirst.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
@@ -18,6 +19,7 @@ namespace aspnetfirst.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly BetContext _context;
+
 
         public UsersController(BetContext context, RoleManager<IdentityRole> roleManagers, UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -37,7 +39,11 @@ namespace aspnetfirst.Controllers
 
         public async Task<IActionResult> WatchUsers() {
             if (User.Identity.IsAuthenticated)
+            {
+                HttpContext.Session.SetString("UserName",User.Identity.Name);
+                
                 return View(await _context.User.ToListAsync());
+            }
             else
                 return RedirectToAction("Login");
          }
@@ -45,6 +51,13 @@ namespace aspnetfirst.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            var x = HttpContext.Session.GetString("UserName");
+            if (x == null)
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -52,6 +65,8 @@ namespace aspnetfirst.Controllers
 
             var user = await _context.User
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            ViewData["UserName"] = HttpContext.Session.GetString("UserName");
             if (user == null)
             {
                 return NotFound();
@@ -64,10 +79,18 @@ namespace aspnetfirst.Controllers
         [Authorize(Roles="admin")]
         // GET: Users/Create
         
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var x = HttpContext.Session.GetString("UserName");
+            if (x == null)
+            {
+                await _signInManager.SignOutAsync();
+
+                return RedirectToAction("Login");
+            }
             return View();
         }
+
 
         [HttpGet]
         public IActionResult Register()
@@ -93,7 +116,7 @@ namespace aspnetfirst.Controllers
                     if (!adminRoleExists)
                         await roleManager.CreateAsync(new IdentityRole("admin"));
 
-                    if(user.UserName == "Ali654")
+                    if(user.UserName == "Ali782")
                         await _userManager.AddToRoleAsync(user, "admin");
                     else
                     await _userManager.AddToRoleAsync(user,"user");
@@ -120,9 +143,9 @@ namespace aspnetfirst.Controllers
             {
                 var result =
             await _signInManager.PasswordSignInAsync(user.UserName, user.UserPassword, true, false);
-                //User users = _context.User.FirstOrDefault(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword);
                 if (result.Succeeded)
                 {
+                    TempData["TempStatus"] = "You logined";
                     return RedirectToAction("WatchUsers", "Users");
                 }
             }
@@ -135,7 +158,6 @@ namespace aspnetfirst.Controllers
         {
 
             await _signInManager.SignOutAsync();
-                //User users = _context.User.FirstOrDefault(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword);
              return RedirectToAction("Login", "Users");
         }
 
@@ -144,31 +166,41 @@ namespace aspnetfirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Username,UserPassword,Points")] User user)
+        public async Task<IActionResult> Create([Bind("UserName,UserPassword,Points")] User user)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["TempStatus"] = $"User {user.UserName} added";
+                return RedirectToAction(nameof(WatchUsers));
             }
             return View(user);
         }
 
         [Authorize(Roles = "admin")]
         // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
+            var x = HttpContext.Session.GetString("UserName");
+            if (x == null)
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Login");
+            }
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+             //var user = await _context.User.FindAsync(id);
+             var user = await _userManager.FindByIdAsync(id);
+          
             if (user == null)
             {
                 return NotFound();
             }
+            
             return View(user);
         }
 
@@ -177,39 +209,40 @@ namespace aspnetfirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserId,Username,UserPassword,Points")] User user)
+        public async Task<IActionResult> Edit(string id,[Bind("Id,UserName,UserPassword,Points")] User user)
         {
             if (id != user.Id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(Convert.ToInt32(user.Id)))
+
+                var users = await _userManager.FindByIdAsync(id);
+                users.UserName = user.UserName;
+                users.UserPassword = user.UserPassword;
+                users.Points = user.Points;
+                IdentityResult x = await _userManager.UpdateAsync(users);
+                    if(!x.Succeeded)
                     {
-                        return NotFound();
+                        return View(user);
                     }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+             
             }
-            return View(user);
+            
+            TempData["TempStatus"] = $"The user{user.UserName} is edited";
+            return RedirectToAction(nameof(WatchUsers));
         }
         [Authorize(Roles = "admin")]
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(string id,string ReturnUrl="Access Denied")
         {
+            var x = HttpContext.Session.GetString("UserName");
+            if (x == null)
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -230,15 +263,17 @@ namespace aspnetfirst.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+
             var user = await _context.User.FindAsync(id);
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
+            TempData["TempStatus"] = $"The user{user.UserName} is deleted";
             return RedirectToAction(nameof(WatchUsers));
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
-            return _context.User.Any(e => Convert.ToInt32(e.Id) == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }

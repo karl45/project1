@@ -44,8 +44,7 @@ namespace aspnetfirst.Data
             modelBuilder.Entity<UserMatch>()
                 .HasOne(u => u.User)
                 .WithMany(v => v.UserMatches)
-                .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(v => v.UserId);
 
             modelBuilder.Entity<UserMatch>()
                 .HasOne(u => u.Match)

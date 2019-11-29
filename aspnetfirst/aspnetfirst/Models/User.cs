@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,6 @@ namespace aspnetfirst.Models
         public string UserPassword { set; get; }
         [Required]
         public int Points { set; get; }
-        public List<IdentityRole> identityRoles { set; get; }
         public List<UserMatch> UserMatches { set; get; }
 
     }

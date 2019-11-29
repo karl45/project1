@@ -210,8 +210,8 @@ namespace aspnetfirst.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "1", AccessFailedCount = 0, ConcurrencyStamp = "79fe89ed-748c-44ef-9688-db78c13060fb", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 100, TwoFactorEnabled = false, UserName = "Ali", UserPassword = "AliPass" },
-                        new { Id = "2", AccessFailedCount = 0, ConcurrencyStamp = "8862ee6d-5f22-40a9-b21d-f493498a6bf9", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 80, TwoFactorEnabled = false, UserName = "Dias", UserPassword = "seniorhacka" }
+                        new { Id = "1", AccessFailedCount = 0, ConcurrencyStamp = "1ba130cc-58ca-4d5d-92f8-e43c9326b8e5", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 100, TwoFactorEnabled = false, UserName = "Ali", UserPassword = "AliPass" },
+                        new { Id = "2", AccessFailedCount = 0, ConcurrencyStamp = "d56556f5-0f09-461a-9ffd-56ee6e4a3759", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 80, TwoFactorEnabled = false, UserName = "Dias", UserPassword = "seniorhacka" }
                     );
                 });
 
@@ -250,21 +250,17 @@ namespace aspnetfirst.Migrations
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "988fbdb9-dfa5-457e-8ee1-5c53152b74eb", ConcurrencyStamp = "c8891e9e-64b0-4e85-9996-09ddc2754f3a", Name = "admin" },
-                        new { Id = "184c0727-3f3c-4246-a68c-b44340d1161a", ConcurrencyStamp = "5e455ec3-4a6c-4395-a57c-5750b484f144", Name = "user" }
+                        new { Id = "942220bc-cf16-446a-8fff-499c37632e85", ConcurrencyStamp = "bd42e6fa-0bc1-4018-95eb-1900dabcc11e", Name = "admin" },
+                        new { Id = "0f31398b-9aec-4e80-bd22-4e87a63916f8", ConcurrencyStamp = "35d6222f-6a1f-4da1-b42a-a27e9f562411", Name = "user" }
                     );
                 });
 
@@ -408,13 +404,6 @@ namespace aspnetfirst.Migrations
                         .WithMany("UserMatches")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.HasOne("aspnetfirst.Models.User")
-                        .WithMany("identityRoles")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

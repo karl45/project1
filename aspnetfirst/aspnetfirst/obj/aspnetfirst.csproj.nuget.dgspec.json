@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\stazher05\\Desktop\\project1ident\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
+    "C:\\Users\\stazher05\\Desktop\\ses\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
   },
   "projects": {
-    "C:\\Users\\stazher05\\Desktop\\project1ident\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
+    "C:\\Users\\stazher05\\Desktop\\ses\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stazher05\\Desktop\\project1ident\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "projectUniqueName": "C:\\Users\\stazher05\\Desktop\\ses\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
         "projectName": "aspnetfirst",
-        "projectPath": "C:\\Users\\stazher05\\Desktop\\project1ident\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "projectPath": "C:\\Users\\stazher05\\Desktop\\ses\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
         "packagesPath": "C:\\Users\\stazher05\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stazher05\\Desktop\\project1ident\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
+        "outputPath": "C:\\Users\\stazher05\\Desktop\\ses\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -53,6 +53,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.2, )"
+            },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",

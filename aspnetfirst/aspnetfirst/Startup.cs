@@ -30,11 +30,22 @@ namespace aspnetfirst
                 options.UseSqlite("Filename=1XBET.db");
             });
 
-            services.AddIdentity<User, IdentityRole>(options=> {
-                options.Password.RequireNonAlphanumeric = false;
-            })
+           services.AddIdentity<User, IdentityRole>(options => {
+                    options.Password.RequireNonAlphanumeric = false;
+
+                })
                .AddEntityFrameworkStores<BetContext>();
-            services.AddMvc();
+
+            services.AddDistributedMemoryCache();
+
+         
+
+
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(20);//You can set Time   
+            });
             services.AddRouting();
             services.AddScoped<PlayerServices>();
             services.AddScoped<TeamServices>();
@@ -65,6 +76,7 @@ namespace aspnetfirst
             }
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {
