@@ -1,0 +1,7 @@
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.AssemblyInfoInputs.cache
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.AssemblyInfo.cs
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.TagHelpers.input.cache
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.TagHelpers.output.cache
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.dll
+C:\Users\stazher05\Desktop\socket\project1\aspnetfirst\aspnetfirst\obj\Debug\netcoreapp3.1\aspnetfirst.pdb

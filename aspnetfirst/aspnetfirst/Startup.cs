@@ -9,6 +9,7 @@ using aspnetfirst.Models;
 using aspnetfirst.IRepositories;
 using aspnetfirst.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -38,14 +39,19 @@ namespace aspnetfirst
 
             services.AddDistributedMemoryCache();
 
-         
 
+            services.AddSignalR();
 
-            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddMvc().AddSessionStateTempDataProvider().AddMvcOptions(options=> {
+                options.EnableEndpointRouting =false;
+            });
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(20);//You can set Time   
             });
+
+           
             services.AddRouting();
             services.AddScoped<PlayerServices>();
             services.AddScoped<TeamServices>();
@@ -61,10 +67,6 @@ namespace aspnetfirst
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IScoreStatisticRepository, ScoreStatisticRepository>();
             services.AddScoped<IMatchRepository,MatchRepository>();
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,14 +80,18 @@ namespace aspnetfirst
             app.UseAuthentication();
             app.UseSession();
             app.UseHttpsRedirection();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Users}/{action=Login}/{id?}");
-            });
-   
+
+
+         
            
+            app.UseMvc(routes =>
+             {
+                 routes.MapRoute(
+                     name: "default",
+                     template: "{controller=Users}/{action=Login}/{id?}");
+             });
+           
+
         }
     }
 }
