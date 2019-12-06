@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using aspnetfirst.Repositories;
 using Microsoft.AspNetCore.Identity;
+using aspnetfirst.Hubs;
 
 namespace aspnetfirst
 {
@@ -38,7 +39,7 @@ namespace aspnetfirst
                .AddEntityFrameworkStores<BetContext>();
 
             services.AddDistributedMemoryCache();
-
+            services.AddRazorPages();
 
             services.AddSignalR();
 
@@ -48,7 +49,7 @@ namespace aspnetfirst
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(20);//You can set Time   
+                //options.IdleTimeout = TimeSpan.FromSeconds(20);//You can set Time   
             });
 
            
@@ -77,20 +78,28 @@ namespace aspnetfirst
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+
+            app.UseRouting();
+
+
             app.UseAuthentication();
             app.UseSession();
             app.UseHttpsRedirection();
 
 
-         
-           
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapHub<CrudUserHub>("/userHub");
+            });
+
             app.UseMvc(routes =>
              {
                  routes.MapRoute(
                      name: "default",
                      template: "{controller=Users}/{action=Login}/{id?}");
              });
-           
+
 
         }
     }

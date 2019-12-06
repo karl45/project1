@@ -14,7 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="SecurityStamp" />
-            
+            <input type="hidden" id="userInput" value="@User.Identity.Name"/>
+            <input type="hidden" id="messageInput" value="@Model.UserName"/>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
@@ -31,7 +32,7 @@
                 <span asp-validation-for="Points" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" id="Save" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
@@ -40,6 +41,10 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/Edit.js"></script>
+<script src="~/js/Log.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

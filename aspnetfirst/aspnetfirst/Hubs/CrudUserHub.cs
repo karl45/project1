@@ -8,8 +8,9 @@ namespace aspnetfirst.Hubs
 {
     public class CrudUserHub:Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SendEdit(string user, string message)
         {
+            user += " Edit ";
             await Clients.All.SendAsync("ReceiveMessage",user,message);
         }
     }

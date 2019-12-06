@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\stazher05\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
+    "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
   },
   "projects": {
-    "C:\\Users\\stazher05\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
+    "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\stazher05\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "projectUniqueName": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
         "projectName": "aspnetfirst",
-        "projectPath": "C:\\Users\\stazher05\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
-        "packagesPath": "C:\\Users\\stazher05\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\stazher05\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
+        "projectPath": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "packagesPath": "C:\\Users\\Ali\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\stazher05\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -46,11 +46,6 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.0, )"
-            },
-            "Microsoft.AspNetCore.Razor.Design": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",

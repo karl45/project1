@@ -10,6 +10,8 @@ using aspnetfirst.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using aspnetfirst.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace aspnetfirst.Controllers
 {
@@ -20,13 +22,15 @@ namespace aspnetfirst.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly BetContext _context;
 
+        private readonly IHubContext<CrudUserHub> _hubContext;
 
-        public UsersController(BetContext context, RoleManager<IdentityRole> roleManagers, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UsersController(BetContext context, IHubContext<CrudUserHub> hubContext, RoleManager<IdentityRole> roleManagers, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             roleManager = roleManagers;
+            _hubContext = hubContext;
         }
 
         // GET: Users
@@ -40,9 +44,12 @@ namespace aspnetfirst.Controllers
         public async Task<IActionResult> WatchUsers() {
             if (User.Identity.IsAuthenticated)
             {
-                HttpContext.Session.SetString("UserName",User.Identity.Name);
-                
-                return View(await _context.User.ToListAsync());
+                    //if(HttpContext.Session.GetString("UserName") == "") 
+                    //{
+                        HttpContext.Session.SetString("UserName", User.Identity.Name);
+                        await _hubContext.Clients.All.SendAsync("Notify", $"{User.Identity.Name} is logined at: {DateTime.Now}");
+                    //}
+                    return View(await _context.User.ToListAsync());
             }
             else
                 return RedirectToAction("Login");
