@@ -6,10 +6,8 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -24,6 +22,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Team)
             </th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -43,11 +43,16 @@
                 @Html.DisplayFor(modelItem => item.Team.TeamName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlayerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a>
+                <a class="btn btn-outline-light" asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-light"  asp-action="Details" asp-route-id="@item.PlayerId">Details</a>
+            </td>
+            <td>
+            <a  class="btn btn-outline-light" asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<a class="btn btn-outline-light" asp-action="Create">Создать игрока</a>

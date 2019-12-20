@@ -6,16 +6,21 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table text-light">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.LeaugueName)
             </th>
-            <th></th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -25,11 +30,18 @@
                 @Html.DisplayFor(modelItem => item.LeaugueName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.LeagueId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LeagueId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LeagueId">Delete</a>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Edit" asp-route-id="@item.LeagueId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Details" asp-route-id="@item.LeagueId">Details</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Delete" asp-route-id="@item.LeagueId">Delete</a>
+            </td>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<a class="btn btn-outline-light" asp-action="Create">Create New</a>

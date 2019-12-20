@@ -6,10 +6,8 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -49,11 +47,18 @@
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  user_id=item.UserId,match_id=item.MatchId}) |
-                @Html.ActionLink("Details", "Details", new { user_id=item.UserId,match_id=item.MatchId }) |
-                @Html.ActionLink("Delete", "Delete", new {  user_id=item.UserId,match_id=item.MatchId })
+                @Html.ActionLink("Edit", "Edit", new { user_id = item.UserId, match_id = item.MatchId })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { user_id = item.UserId, match_id = item.MatchId })
+            </td>
+            <td>
+            @Html.ActionLink("Delete", "Delete", new { user_id = item.UserId, match_id = item.MatchId })
             </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>

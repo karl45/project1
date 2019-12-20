@@ -34,12 +34,7 @@ namespace aspnetfirst.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
-        {
-            var context = _context.Match.Include(m => m.UserMatches).ThenInclude(m => m.User).Include(m => m.Team_home).Include(m => m.Team_guest);
-
-            return View(await context.ToListAsync());
-        }
+   
 
         public async Task<IActionResult> WatchUsers() {
             if (User.Identity.IsAuthenticated)
@@ -177,10 +172,34 @@ namespace aspnetfirst.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                TempData["TempStatus"] = $"User {user.UserName} added";
-                return RedirectToAction(nameof(WatchUsers));
+                User users = new User { UserPassword = user.UserPassword, UserName = user.UserName };
+
+
+                var result = await _userManager.CreateAsync(user, user.UserPassword);
+                if (result.Succeeded)
+                {
+
+                    bool userRoleExists = await roleManager.RoleExistsAsync("user");
+                    bool adminRoleExists = await roleManager.RoleExistsAsync("admin");
+                    if (!userRoleExists)
+                        await roleManager.CreateAsync(new IdentityRole("user"));
+                    if (!adminRoleExists)
+                        await roleManager.CreateAsync(new IdentityRole("admin"));
+
+                    if (user.UserName == "Ali782")
+                        await _userManager.AddToRoleAsync(user, "admin");
+                    else
+                        await _userManager.AddToRoleAsync(user, "user");
+                    await _signInManager.SignInAsync(user, false);
+                    return RedirectToAction("Login", "Users");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
             return View(user);
         }

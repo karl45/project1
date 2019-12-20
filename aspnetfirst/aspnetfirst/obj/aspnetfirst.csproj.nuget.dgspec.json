@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
+    "C:\\Users\\Владелец\\Desktop\\final\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
+    "C:\\Users\\Владелец\\Desktop\\final\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "projectUniqueName": "C:\\Users\\Владелец\\Desktop\\final\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
         "projectName": "aspnetfirst",
-        "projectPath": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
-        "packagesPath": "C:\\Users\\Ali\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ali\\Desktop\\socket\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
+        "projectPath": "C:\\Users\\Владелец\\Desktop\\final\\project1\\aspnetfirst\\aspnetfirst\\aspnetfirst.csproj",
+        "packagesPath": "C:\\Users\\Владелец\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Владелец\\Desktop\\final\\project1\\aspnetfirst\\aspnetfirst\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ali\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Владелец\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -56,6 +56,10 @@
               "version": "[3.1.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[3.1.0, )"
             },

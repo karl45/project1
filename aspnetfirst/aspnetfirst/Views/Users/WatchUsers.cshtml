@@ -4,34 +4,24 @@
     ViewData["Title"] = "Users";
 }
 
-<h2>Users</h2>
-
 @{
     if (TempData["TempStatus"] != null)
     {
-        <h3>Info: @TempData["TempStatus"]</h3>
+        <h3 class="text-light">Info: @TempData["TempStatus"]</h3>
     }
 
 }
-<ul>
-    <li>@Html.ActionLink("Player", "Index", "Players")</li>
-    <li>@Html.ActionLink("Team", "Index", "Teams")</li>
-    <li>@Html.ActionLink("League", "Index", "Leagues")</li>
-    <li>@Html.ActionLink("Coach", "Index", "Coaches")</li>
-    <li>@Html.ActionLink("ScoreStatistic", "Index", "ScoreStatistics")</li>
-    <li>@Html.ActionLink("Match", "Index", "Matches")</li>
-</ul>
-<p>
-    <a asp-action="Create" asp-controller="Users">Create New</a>
-</p>
-<h3>Matches</h3>
+
+<h3 class="text-light">Пользователи</h3>
 
 
-<table>
+<table class="table text-light">
     <thead>
         <tr>
-            <th>Name_of_person</th>
+            <th scope="col">Name_of_person</th>
             <th>Points</th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -39,22 +29,33 @@
 
         @foreach (var Item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(model => Item.UserName)</td>
-                <td>@Html.DisplayFor(model => Item.Points)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@Item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => Item.UserName)</td>
+            <td>@Html.DisplayFor(model => Item.Points)</td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Edit" asp-route-id="@Item.Id">Edit</a> 
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Details" asp-route-id="@Item.Id">Details</a> 
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Delete" asp-route-id="@Item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
-<form method="post" asp-controller="Users" asp-action="LogOut">
-    <input type="submit" value="Выход" />
-</form>
-<ul id="messagesList"></ul>
+
+<p>
+    <a class="btn btn-outline-light" asp-action="Create" asp-controller="Users">Создать нового пользвателя</a>
+</p>
+
+
+
+
+<ul id="messagesList" class="text-light">
+
+</ul>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/Log.js"></script>

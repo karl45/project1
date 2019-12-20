@@ -4,28 +4,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-light">Текущие матчи</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table text-light">
     <thead>
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Team_home)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Team_guest)
             </th>
-            <th>
-                @Html.DisplayNameFor(model=>model.ScoreStatistic)
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ScoreStatistic)
             </th>
-            <th></th>
+            <th scope="col">
+
+            </th>
+            <th scope="col">
+
+            </th>
+            <th scope="col">
+
+            </th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Team_home.TeamName)
@@ -34,14 +41,20 @@
                 @Html.DisplayFor(modelItem => item.Team_guest.TeamName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem=>item.ScoreStatistic.Score)
+                @Html.DisplayFor(modelItem => item.ScoreStatistic.Score)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MatchId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MatchId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MatchId">Delete</a>
+                <a class="btn btn-outline-light" asp-action="Edit" asp-route-id="@item.MatchId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Details" asp-route-id="@item.MatchId">Details</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-light" asp-action="Delete" asp-route-id="@item.MatchId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
+
 </table>
+<a class="btn btn-outline-light" asp-action="Create">Create New</a>

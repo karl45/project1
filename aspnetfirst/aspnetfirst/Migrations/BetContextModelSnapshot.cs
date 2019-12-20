@@ -14,54 +14,225 @@ namespace aspnetfirst.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099");
+                .HasAnnotation("ProductVersion", "3.1.0");
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "105765f0-88cb-42b6-a129-f49b5ca1f555",
+                            ConcurrencyStamp = "8d28c1c7-2cfc-4693-900a-c44c652c97a3",
+                            Name = "admin"
+                        },
+                        new
+                        {
+                            Id = "5be16200-5839-4ebc-8fa6-8e2df864c7d6",
+                            ConcurrencyStamp = "7e092982-e457-469d-ab38-e90478f68579",
+                            Name = "user"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
 
             modelBuilder.Entity("aspnetfirst.Models.Coach", b =>
                 {
-                    b.Property<int>("CoachId");
+                    b.Property<int>("CoachId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CoachName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("Rate");
+                    b.Property<int>("Rate")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("CoachId");
 
                     b.ToTable("Coach");
 
                     b.HasData(
-                        new { CoachId = 1, CoachName = "Juze", Rate = 95 },
-                        new { CoachId = 2, CoachName = "Morris", Rate = 88 },
-                        new { CoachId = 3, CoachName = "Philippo", Rate = 96 }
-                    );
+                        new
+                        {
+                            CoachId = 1,
+                            CoachName = "Juze",
+                            Rate = 95
+                        },
+                        new
+                        {
+                            CoachId = 2,
+                            CoachName = "Morris",
+                            Rate = 88
+                        },
+                        new
+                        {
+                            CoachId = 3,
+                            CoachName = "Philippo",
+                            Rate = 96
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.League", b =>
                 {
                     b.Property<int>("LeagueId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("LeaugueName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LeagueId");
 
                     b.ToTable("League");
 
                     b.HasData(
-                        new { LeagueId = 1, LeaugueName = "Italy" },
-                        new { LeagueId = 2, LeaugueName = "Spain" }
-                    );
+                        new
+                        {
+                            LeagueId = 1,
+                            LeaugueName = "Italy"
+                        },
+                        new
+                        {
+                            LeagueId = 2,
+                            LeaugueName = "Spain"
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Match", b =>
                 {
                     b.Property<int>("MatchId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Team_guestId");
+                    b.Property<int>("Team_guestId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Team_homeId");
+                    b.Property<int>("Team_homeId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MatchId");
 
@@ -72,23 +243,37 @@ namespace aspnetfirst.Migrations
                     b.ToTable("Match");
 
                     b.HasData(
-                        new { MatchId = 1, Team_guestId = 2, Team_homeId = 1 },
-                        new { MatchId = 2, Team_guestId = 1, Team_homeId = 3 }
-                    );
+                        new
+                        {
+                            MatchId = 1,
+                            Team_guestId = 2,
+                            Team_homeId = 1
+                        },
+                        new
+                        {
+                            MatchId = 2,
+                            Team_guestId = 1,
+                            Team_homeId = 3
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Player", b =>
                 {
                     b.Property<int>("PlayerId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Deffence");
+                    b.Property<int>("Deffence")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Offence");
+                    b.Property<int>("Offence")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("PlayerName");
+                    b.Property<string>("PlayerName")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("TeamId");
+                    b.Property<int>("TeamId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("PlayerId");
 
@@ -97,25 +282,44 @@ namespace aspnetfirst.Migrations
                     b.ToTable("Player");
 
                     b.HasData(
-                        new { PlayerId = 1, Deffence = 48, Offence = 95, PlayerName = "Ronaldo", TeamId = 1 },
-                        new { PlayerId = 2, Deffence = 56, Offence = 85, PlayerName = "Kaka", TeamId = 2 }
-                    );
+                        new
+                        {
+                            PlayerId = 1,
+                            Deffence = 48,
+                            Offence = 95,
+                            PlayerName = "Ronaldo",
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            PlayerId = 2,
+                            Deffence = 56,
+                            Offence = 85,
+                            PlayerName = "Kaka",
+                            TeamId = 2
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.ScoreStatistic", b =>
                 {
                     b.Property<int>("ScoreStatisticId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("MatchId");
+                    b.Property<int>("MatchId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Numberofpenalty");
+                    b.Property<int>("Numberofpenalty")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Numberofredcard");
+                    b.Property<int>("Numberofredcard")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("NumberofyellowCard");
+                    b.Property<int>("NumberofyellowCard")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Score");
+                    b.Property<string>("Score")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ScoreStatisticId");
 
@@ -125,23 +329,43 @@ namespace aspnetfirst.Migrations
                     b.ToTable("ScoreStatistic");
 
                     b.HasData(
-                        new { ScoreStatisticId = 1, MatchId = 1, Numberofpenalty = 13, Numberofredcard = 3, NumberofyellowCard = 5, Score = "2-0" },
-                        new { ScoreStatisticId = 2, MatchId = 2, Numberofpenalty = 15, Numberofredcard = 2, NumberofyellowCard = 6, Score = "3-2" }
-                    );
+                        new
+                        {
+                            ScoreStatisticId = 1,
+                            MatchId = 1,
+                            Numberofpenalty = 13,
+                            Numberofredcard = 3,
+                            NumberofyellowCard = 5,
+                            Score = "2-0"
+                        },
+                        new
+                        {
+                            ScoreStatisticId = 2,
+                            MatchId = 2,
+                            Numberofpenalty = 15,
+                            Numberofredcard = 2,
+                            NumberofyellowCard = 6,
+                            Score = "3-2"
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Team", b =>
                 {
                     b.Property<int>("TeamId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("CoachId");
+                    b.Property<int>("CoachId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("LeagueId");
+                    b.Property<int>("LeagueId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("TeamName");
+                    b.Property<string>("TeamName")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("TeamRate");
+                    b.Property<int>("TeamRate")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("TeamId");
 
@@ -150,53 +374,89 @@ namespace aspnetfirst.Migrations
                     b.ToTable("Team");
 
                     b.HasData(
-                        new { TeamId = 1, CoachId = 1, LeagueId = 1, TeamName = "Juventus", TeamRate = 98 },
-                        new { TeamId = 2, CoachId = 2, LeagueId = 1, TeamName = "Milan", TeamRate = 85 },
-                        new { TeamId = 3, CoachId = 3, LeagueId = 1, TeamName = "Inter", TeamRate = 78 }
-                    );
+                        new
+                        {
+                            TeamId = 1,
+                            CoachId = 1,
+                            LeagueId = 1,
+                            TeamName = "Juventus",
+                            TeamRate = 98
+                        },
+                        new
+                        {
+                            TeamId = 2,
+                            CoachId = 2,
+                            LeagueId = 1,
+                            TeamName = "Milan",
+                            TeamRate = 85
+                        },
+                        new
+                        {
+                            TeamId = 3,
+                            CoachId = 3,
+                            LeagueId = 1,
+                            TeamName = "Inter",
+                            TeamRate = 78
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Points");
+                    b.Property<int>("Points")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
-                    b.Property<string>("UserPassword");
+                    b.Property<string>("UserPassword")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -210,18 +470,46 @@ namespace aspnetfirst.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "1", AccessFailedCount = 0, ConcurrencyStamp = "1ba130cc-58ca-4d5d-92f8-e43c9326b8e5", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 100, TwoFactorEnabled = false, UserName = "Ali", UserPassword = "AliPass" },
-                        new { Id = "2", AccessFailedCount = 0, ConcurrencyStamp = "d56556f5-0f09-461a-9ffd-56ee6e4a3759", EmailConfirmed = false, LockoutEnabled = false, PhoneNumberConfirmed = false, Points = 80, TwoFactorEnabled = false, UserName = "Dias", UserPassword = "seniorhacka" }
-                    );
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "61524aa9-2ea5-49d5-923e-8a8daa14acf8",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            Points = 100,
+                            SecurityStamp = "b484ec93-36f7-4ec1-b250-193c5a5c95cb",
+                            TwoFactorEnabled = false,
+                            UserName = "Ali",
+                            UserPassword = "AliPass"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "91ccc84d-9e48-497b-a0c7-b5d40dc4eb09",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            Points = 80,
+                            SecurityStamp = "5d1c2bc7-4254-441c-98fb-d3e78b3e255f",
+                            TwoFactorEnabled = false,
+                            UserName = "Dias",
+                            UserPassword = "seniorhacka"
+                        });
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.UserMatch", b =>
                 {
-                    b.Property<int>("MatchId");
+                    b.Property<int>("MatchId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("UserMatchId");
+                    b.Property<int>("UserMatchId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MatchId", "UserId");
 
@@ -230,122 +518,75 @@ namespace aspnetfirst.Migrations
                     b.ToTable("UserMatch");
 
                     b.HasData(
-                        new { MatchId = 1, UserId = "1", UserMatchId = 1 },
-                        new { MatchId = 2, UserId = "2", UserMatchId = 2 },
-                        new { MatchId = 2, UserId = "1", UserMatchId = 3 }
-                    );
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = "942220bc-cf16-446a-8fff-499c37632e85", ConcurrencyStamp = "bd42e6fa-0bc1-4018-95eb-1900dabcc11e", Name = "admin" },
-                        new { Id = "0f31398b-9aec-4e80-bd22-4e87a63916f8", ConcurrencyStamp = "35d6222f-6a1f-4da1-b42a-a27e9f562411", Name = "user" }
-                    );
+                        new
+                        {
+                            MatchId = 1,
+                            UserId = "1",
+                            UserMatchId = 1
+                        },
+                        new
+                        {
+                            MatchId = 2,
+                            UserId = "2",
+                            UserMatchId = 2
+                        },
+                        new
+                        {
+                            MatchId = 2,
+                            UserId = "1",
+                            UserMatchId = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("RoleId")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("UserId")
+                    b.HasOne("aspnetfirst.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("ProviderKey");
-
-                    b.Property<string>("ProviderDisplayName");
-
-                    b.Property<string>("UserId")
+                    b.HasOne("aspnetfirst.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
+                    b.HasOne("aspnetfirst.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
+                    b.HasOne("aspnetfirst.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Coach", b =>
@@ -353,7 +594,8 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.Team", "Team")
                         .WithOne("Coach")
                         .HasForeignKey("aspnetfirst.Models.Coach", "CoachId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Match", b =>
@@ -361,12 +603,14 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.Team", "Team_guest")
                         .WithMany()
                         .HasForeignKey("Team_guestId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("aspnetfirst.Models.Team", "Team_home")
                         .WithMany()
                         .HasForeignKey("Team_homeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Player", b =>
@@ -374,7 +618,8 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.ScoreStatistic", b =>
@@ -382,7 +627,8 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.Match", "Match")
                         .WithOne("ScoreStatistic")
                         .HasForeignKey("aspnetfirst.Models.ScoreStatistic", "MatchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.Team", b =>
@@ -390,7 +636,8 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.League", "League")
                         .WithMany("Teams")
                         .HasForeignKey("LeagueId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("aspnetfirst.Models.UserMatch", b =>
@@ -398,57 +645,14 @@ namespace aspnetfirst.Migrations
                     b.HasOne("aspnetfirst.Models.Match", "Match")
                         .WithMany("UserMatches")
                         .HasForeignKey("MatchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("aspnetfirst.Models.User", "User")
                         .WithMany("UserMatches")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("aspnetfirst.Models.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("aspnetfirst.Models.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("aspnetfirst.Models.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("aspnetfirst.Models.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
